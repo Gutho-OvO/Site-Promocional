@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DUNE: PART TWO</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="progress-wrap">
+    <div id="progress"></div>
+    <img id="runner" src="./Imagens/" alt="Worm Runner">
+</div>
+    
+<header>
+    <h1>DUNE: PART TWO</h1>
+    <h2>O Retorno de Paul Atreides</h2>
+</header>
+
+<script>
+    const progress=document.getElementById('progress');
+    const runner=document.getElementById('runner');
+    let lastScroll=0;
+    function updateProgress(){
+    const scrollTop=window.scrollY;
+    const docHeight=document.body.scrollHeight-window.innerHeight;
+    const pct=(scrollTop/docHeight)*100;
+    progress.style.width=pct+'%';
+    const wrapWidth=document.getElementById('progress-wrap').offsetWidth;
+    const leftPx=(pct/100)*(wrapWidth-runner.offsetWidth);
+    runner.style.left=leftPx+'px';
+    runner.style.transform=scrollTop>lastScroll?'scaleX(1)':'scaleX(-1)';
+    lastScroll=scrollTop;
+}
+  window.addEventListener('scroll',updateProgress);
+  window.addEventListener('resize',updateProgress);
+  updateProgress();
+</script>
+
+</body>
+</html>
